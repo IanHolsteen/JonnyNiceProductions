@@ -37,13 +37,29 @@ Contents:
 
                 This is the default page for the log-in/sign-up/account page. If you aren't signed in, you'll see here that you are a guest and you have the options to sign in.
 
-            Cart Details:
+            Cart Details / Cart Item Card:
 
-                This component holds the map over the orders inside the associated cart (signed in user or guest, if not signed in) and also holds the logic for creating a Stripe charge call with the dollar amount specified by the sum of the cost of the leases in the cart. This component also holds the logic to apply a discount to the total if a user is signed in.
+                This component holds the map over the orders inside the associated cart (signed in user or guest, if not signed in); and displays each lease in a Cart Item Card componenet. The Cart Details component also holds the logic for creating a Stripe charge call with the dollar amount specified by the sum of the cost of the leases in the cart. This component also holds the logic to apply a discount to the total if a user is signed in.
 
             Contract Download/Download Button:
 
                 These components hold the logic for delivering the active storage link to a lease contract and the audio file that was purchased through the cart.
+
+            Footer / NavBar / Hero:
+
+                Just what it sounds like, the navbar and footer for the app. Hero component displays the image behind manyh of the pages.
+
+            Purchases:
+
+                This component maps over the purchases made by a user, if they exist. This component is inherited by the account component and will display in a user's account if they have made any purchases.
+
+            SignIn / SingUp:
+
+                These components hold the logic to accept a users info in a form and sends it to the db to either create a new user account or sign a user into an existing account. These components are both inherited by the Account component.
+
+            YoutubeEmbed:
+
+                This component is used to embed youtube videos into the about page.
 
         Pages:
 
@@ -58,7 +74,23 @@ Contents:
 
             About / about.js:
 
-                This page and route contains hard coded information about the music producer, along with a photo and a number of youtube videos embedded inside. This page inherits from a component in the components foler called YoutubeEmbed.js; this component returns an iframe containing the youtubeURL.
+                This page and route contains hard coded information about the music producer, along with a photo and a number of youtube videos embedded inside. This page inherits from a component in the components folder called YoutubeEmbed.js; this component returns an iframe containing the youtubeURL.
+
+            cart.js:
+
+                This page inherits the cart details and displays all cart information for a user, if they have any items in their cart. This page holds the logic to display an empty message and a return button if the user has no items in their cart.
+
+            contact.js:
+
+                This page uses emailjs to send an email to the producer when the contact form has been filled out. This component holds the logic to display a success message if the form has been submitted.
+
+            login.js:
+
+                This page holds all account, LogIn, and SignIn features, depending on the logged in state of the user. If a user is not signed in, they will only have the ability to sign in or create an account.
+
+            placements.js:
+
+                This page inherits the spotify component and embeds the specified spotify title, playable with the signin capability and unique colors based on the title.
 
 
 
