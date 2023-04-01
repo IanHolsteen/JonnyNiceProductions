@@ -4,6 +4,7 @@ JONNY NICE PRODUCTIONS
 
 This Rails application featuring a Next.js client is built as a portfolio and sales website for an independant music producer.
 
+
 This website is currently deployed to https://jonnynice.onrender.com/.
 
 Due to the intuitive routing structure of Next.js, the components are largely named the same as the route that exists in the deployed website. Also due to the render of this website, the project can not be cloned and deployed as it currently exists in this repo. In order to deploy this application locally, follow these steps:
