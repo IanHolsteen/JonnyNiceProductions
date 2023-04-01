@@ -89,11 +89,11 @@ export default function Navbar() {
     return (
         <div style= {{ backgroundColor: `${color}` }}className="fixed left-0 top-8 w-full z-10 ease-in duration-300 flex items-center justify-center hover:bg-white h-20 ">
             <div></div>
-            <ul style={{ color: `${textColor}` }} className="flex px-2 text-white">
-                <li className="px-5"><Link href="/placements">Placements</Link></li>
-                <li className="px-5"><Link href="/about">About</Link></li>
-                <li className="px-4"><Link href="/contact">Contact</Link></li>
-            </ul>
+                <ul style={{ color: `${textColor}` }} className="flex px-5 text-white">
+                    <li className="px-5"><Link href="/placements">Credits</Link></li>
+                    <li className="px-5"><Link href="/about">About</Link></li>
+                    <li className="px-4"><Link href="/contact">Contact</Link></li>
+                </ul>
             <div className="px-[250px]">
                 <div className="relative w-20 h-20">
                     <div style= {{ backgroundColor: `${color}` }} className="absolute top-0 left-0 w-20 h-20 transform rotate-45"></div>
