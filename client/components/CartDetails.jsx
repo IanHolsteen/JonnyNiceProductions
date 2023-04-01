@@ -136,7 +136,7 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                         <thead>
                             <tr>
                                 <td className="pt-5 font-medium">
-                                    Subtotal <span>({total_cart_items} product{total_cart_items > 1 ? "s" : null})</span>
+                                    {/* Subtotal <span>({total_cart_items} product{total_cart_items > 1 ? "s" : null})</span> */}
                                 </td>
                                 <td className='pt-5 font-medium text-right'>
                                 <div>
