@@ -11,8 +11,29 @@ Due to the intuitive routing structure of Next.js, the components are largely na
 
     1. Remove all controllers from the '/app/controllers/api' folder and move them one level up, into the 'controllers' folder.
     2. In the '/config/routes.rb' file, remove everything on line 3 and on line 24.
-    3. Run 'rails s' in one terminal instance.
-    4. Run 'npm i --prefix client && npm run dev --prefix client' in another terminal instance.
+    3. In the '/client/next.config.js' file, change the entirety of line 9 to the following code:
+
+        module.exports = {
+            async rewrites() {
+                return [
+                    {
+                        source: '/api/:path*',
+                        destination: 'http://localhost:3000/:path*'
+                    }
+                ]
+            },
+        }
+
+    4. In the  'client/pages/instrumentals/[id]' file, change the url on line 49 to the following:
+
+        const audioUrl = `http://localhost:3000${instrumental && instrumental.audio_files && instrumental.audio_files[0].file}`
+
+    5. Repeat step 4 for the 'client/pages/instrumentals/index' file. Change line 54 to the following:
+
+    const audioUrl = `http://localhost:3000${instrumental.audio_files[0].file}`;
+
+    6. Run 'rails s' in one terminal instance.
+    7. Run 'npm i --prefix client && npm run dev --prefix client' in another terminal instance.
 
 The image below (or found at public/images/image.png) is the map that I created to sketch out my database before creating the rails application. I'll describe the flow below as well:
 A genre has many instrumentals; an instrumental has many audio files, an audio file belongs to a lease and also to an instrumental. A lease has one audio file, and also has many orders, and has many users through orders. An order has one lease, and thus has one audio file through the lease, and also belongs to a cart. A cart has many orders, has many leases, through orders, and belongs to a user. A user has one cart, and has many orders, through that cart. A user also has many purchases. Finally, a purchase has many orders, and belongs to a user.
