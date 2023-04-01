@@ -5,7 +5,7 @@ import Hero from '../components/Hero'
 import React from 'react'
 import { loadStripe } from "@stripe/stripe-js"
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
