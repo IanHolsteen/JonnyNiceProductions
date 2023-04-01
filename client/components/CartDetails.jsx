@@ -32,7 +32,7 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
     }
 
     const createCartItems = cart?.map((cartItem) => {
-        console.log(cartItem)
+        total_cart_items += cartItem.quantity
         total += cartItem.lease.price
         return <CartItemCard
             key={cartItem.id}
@@ -158,7 +158,7 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                             </tr>
                             <tr className='border-b'>
                                 <td className='text-base font-bold pb-10'>Total</td>
-                                <td className='text-base font-bold pb-10 text-right'><span>$ {discountedTotal}.00</span></td>
+                                <td className='text-base font-bold pb-10 text-right'><span>${discountedTotal.toFixed(2)}</span></td>
                             </tr>
                         </tbody>
                     </table>

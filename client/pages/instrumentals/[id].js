@@ -88,7 +88,7 @@ export default function Instrumental () {
                             <p>Price: {audio_file.lease.price}</p>
                             <button onClick={() => both(audio_file.lease.id)}>
                             {selectedLeaseId === audio_file.lease.id
-                                ? `${instrumental.title} added to cart!`
+                                ? `${instrumental.title} added to cart`
                                 : "Add to Cart"
                             }
                             </button>

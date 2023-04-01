@@ -61,7 +61,7 @@ export default function Instrumentals () {
                             <h3>Genre: {instrumental.genre.name}</h3>
                             <button onClick={() => {
                                 handleClick(instrumental.audio_files[0].lease?.id)
-                            }}>{selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title} added to cart!` : "Add to Cart" }</button>
+                            }}>{selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title} added to cart` : "Add to Cart" }</button>
                             <AudioPlayer
                                 src={audioUrl}
                                 onPlay={e => console.log("onPlay")}
