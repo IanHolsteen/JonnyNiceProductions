@@ -53,27 +53,32 @@ export default function Instrumentals () {
                     {instrumentals && instrumentals.map(instrumental => {
                         const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
                         return (
-                        <div key={instrumental.id} className="p-4">
-                            <div className="border-2 border-slate-800 rounded-lg p-2">
-                            <Link href={`/instrumentals/${instrumental.id}`}>
-                                <p className='font-bold'>{instrumental.title}</p>
-                            </Link>
-                            <h3>Genre: {instrumental.genre.name}</h3>
-                            <button onClick={() => {
-                                handleClick(instrumental.audio_files[0].lease?.id)
-                            }}>{selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title} added to cart` : "Add to Cart" }</button>
-                            <AudioPlayer
-                                src={audioUrl}
-                                onPlay={e => console.log("onPlay")}
-                                style={{
-                                backgroundColor: 'rgba(30, 41, 59, 0.5)',
-                                borderRadius: '10px',
-                                padding: '10px',
-                                textColor: 'white',
-                                }}
-                            />
+                            <div key={instrumental.id} className="p-4">
+                                <div className="border-2 border-slate-800 rounded-lg p-2">
+                                    <div className="flex justify-between items-center">
+                                        <button 
+                                            onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
+                                            className="border-2 rounded-md"
+                                        >
+                                            {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title} added to cart!` : "Add to Cart" }
+                                        </button>
+                                        <Link href={`/instrumentals/${instrumental.id}`}>
+                                            <p className='underline font-bold text-xl p-2'>{instrumental.title}</p>
+                                        </Link>
+                                        <h3>Genre: {instrumental.genre.name}</h3>
+                                    </div>
+                                <AudioPlayer
+                                    src={audioUrl}
+                                    onPlay={e => console.log("onPlay")}
+                                    style={{
+                                    backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                                    borderRadius: '10px',
+                                    padding: '10px',
+                                    textColor: 'white',
+                                    }}
+                                />
+                                </div>
                             </div>
-                        </div>
                         )
                     })}
                 </div>
