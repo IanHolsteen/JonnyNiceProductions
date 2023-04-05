@@ -71,11 +71,6 @@ export default function Instrumental () {
                 <h2 className="text-6xl font-bold">{title}</h2>
                 <p className="py-5 text-xl"></p>
                 <h3>Genre: {instrumental.genre?.name}</h3>
-                <p className="py-5 text-xl"></p>
-                    {/* <button onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}>
-                        {showPopUp ? `${instrumental.title} added to cart!` : "Add to Cart" }
-                    </button> */}
-                    <p className="py-5 text-xl"></p>
                     <div key={instrumental.id}>
                         <AudioPlayer
                             src={audioUrl}
@@ -88,7 +83,8 @@ export default function Instrumental () {
                             }}
                         />
                 </div>
-                <div className="flex flex-wrap justify-center gap-4 border-t-2 py-4">
+                <h2 className="text-xl p-5">Lease Options</h2>
+                <div className="flex flex-wrap justify-center gap-4 border-t-2 py-6">
                     {instrumental?.audio_files?.map((audio_file, j) => (
                         audio_file?.lease && (
                         <div key={j} className="p-4 border border-gray-200">
