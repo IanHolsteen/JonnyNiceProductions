@@ -126,9 +126,9 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                 </div>
             </div>
             <div className="bg-stone-100 h-span">
-                <div className="grid grid-row-1 divide-y ml-40 max-w-[600px]">
+                <div className="grid grid-row-1 divide-y ml-20 mr-20 max-w-[600px]">
                     <h1 className="font-bold text-4xl mb-10 mt-14">Order Summary</h1>
-                    <div className='py-5'>
+                    <div className=''>
                         <button className='text-base'>{user?.email == "Guest" ? "Sign Up for a discount" : null}</button>
                         <form></form>
                     </div>
@@ -136,17 +136,16 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                         <thead>
                             <tr>
                                 <td className="pt-5 font-medium">
-                                    {/* Subtotal <span>({total_cart_items} product{total_cart_items > 1 ? "s" : null})</span> */}
+                                    Subtotal <span>({total_cart_items} product{total_cart_items > 1 ? "s" : null})</span>
                                 </td>
                                 <td className='pt-5 font-medium text-right'>
                                 <div>
                                     <span>Total: ${total.toFixed(2)}</span>
-                                    {user?.email == "Guest" ? null : (<div>
-                                                                    <p>{dis}</p>
-                                                                    <span>
-                                                                        Discounted total: ${discountedTotal.toFixed(2)}
-                                                                    </span>
-                                                                </div>)}
+                                    {user?.email == "Guest" ? null : (<div><p>{dis}</p>
+                                        <span>
+                                            Discounted total: ${discountedTotal.toFixed(2)}
+                                        </span>
+                                    </div>)}
                                 </div>
                                 </td>
                             </tr>
@@ -158,7 +157,7 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                             </tr>
                             <tr className='border-b'>
                                 <td className='text-base font-bold pb-10'>Total</td>
-                                <td className='text-base font-bold pb-10 text-right'><span>${discountedTotal.toFixed(2)}</span></td>
+                                <td className='text-base font-bold pb-10 text-right'><span>$ {discountedTotal.toFixed(2)}</span></td>
                             </tr>
                         </tbody>
                     </table>

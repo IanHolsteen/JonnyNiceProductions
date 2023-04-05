@@ -13,6 +13,7 @@ export default function Instrumental () {
     const router = useRouter()
     const id = router.query.id
     const [selectedLeaseId, setSelectedLeaseId] = useState(null);
+    const [addedToCartIds, setAddedToCartIds] = useState([]);
 
     useEffect(() => {
         fetch(`/api/instrumentals/${id}`)
@@ -34,17 +35,24 @@ export default function Instrumental () {
             .then(res => res.json())
             .then(data => {
                 setCart(items => [...items, data])
-                setShowPopUp(true);
-                setTimeout(() => {
-                    setShowPopUp(false);
-                }, 2000);
             })
         };
 
-    function both(lease) {
-        setSelectedLeaseId(lease);
-        handleClick(lease);
-    }
+    useEffect(() => {
+        let timerId;
+        if (addedToCartIds.length > 0) {
+            timerId = setTimeout(() => {
+            setAddedToCartIds([]);
+        }, 2000);
+            }
+        return () => clearTimeout(timerId);
+    }, [addedToCartIds]);
+
+    const handleButtonClicked = (leaseId) => {
+        setSelectedLeaseId(leaseId);
+        setAddedToCartIds([...addedToCartIds, leaseId]);
+        handleClick(leaseId);
+    };
 
     const audioUrl = `https://jonnynice.onrender.com${instrumental && instrumental.audio_files && instrumental.audio_files[0].file}`
 
@@ -52,7 +60,7 @@ export default function Instrumental () {
 
     return (
         <>
-        <div className="flex items-center justify-center h-screen mb-12 bg-fixed bg-center bg-cover bg-home">
+        <div className="flex items-center justify-center h-screen bg-fixed bg-center bg-cover bg-home">
             <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-[2]"/>
                 <div className="p-5 text-white z-[2] text-center w-[900px]">
                 <div className='absolute items-center z-[4]'>
@@ -84,14 +92,17 @@ export default function Instrumental () {
                     {instrumental?.audio_files?.map((audio_file, j) => (
                         audio_file?.lease && (
                         <div key={j} className="p-4 border border-gray-200">
-                            <p>Contract Info: {audio_file.lease.contract_info}</p>
-                            <p>Price: {audio_file.lease.price}</p>
-                            <button onClick={() => both(audio_file.lease.id)}>
-                            {selectedLeaseId === audio_file.lease.id
-                                ? `${instrumental.title} added to cart`
-                                : "Add to Cart"
-                            }
-                            </button>
+                            <p className="text-xl" >{audio_file.lease.contract_info}</p>
+                            <div className="flex justify-between items-center pt-5" >
+                                <p>Price: $ {audio_file.lease.price}</p>
+                                <button
+                                className=" p-1 border rounded-md"
+                                    onClick={() => handleButtonClicked(audio_file.lease.id)}
+                                    disabled={selectedLeaseId === audio_file.lease.id || addedToCartIds.includes(audio_file.lease.id)}
+                                >
+                                    {addedToCartIds.includes(audio_file.lease.id) ? `${audio_file.lease.contract_info} added to cart` : 'add to cart'}
+                                </button>
+                            </div>
                         </div>
                         )
                     ))}
