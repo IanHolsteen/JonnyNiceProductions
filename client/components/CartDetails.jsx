@@ -32,7 +32,7 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
     }
 
     const createCartItems = cart?.map((cartItem) => {
-        total_cart_items += cartItem.quantity
+        total_cart_items += 1
         total += cartItem.lease.price
         return <CartItemCard
             key={cartItem.id}
