@@ -63,7 +63,7 @@ export default function Instrumentals () {
                                             onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
                                             className="border-2 rounded-md"
                                         >
-                                            {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart!` : "Add to Cart" }
+                                            {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart` : "Add to Cart" }
                                         </button>
                                         <h3>Genre: {instrumental.genre.name}</h3>
                                     </div>
