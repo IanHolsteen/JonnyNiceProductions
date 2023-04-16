@@ -5,7 +5,7 @@ import CartContext from '../../contexts/CartContext';
 import UserContext from '../../contexts/UserContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 
 export default function Instrumental () {
     const [instrumental, setInstrumental] = useState([]);
