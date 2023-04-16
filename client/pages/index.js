@@ -4,6 +4,7 @@ import Carousel from '../components/Carousel'
 import Hero from '../components/Hero'
 import React from 'react'
 import { loadStripe } from "@stripe/stripe-js"
+import Layout from '../components/Layout';
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -12,13 +13,7 @@ export default function Home() {
   const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
    return (
-    <>
-      <Head>
-        <title>Jonny Nice Productions</title>
-        <meta name="description" content="Jonny Nice Productions" />
-        <link rel="icon" href="/flavicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+    <Layout>
       <Hero heading="Jonny Nice" message="Producer, Pianist, Composer" />
       {/* <div className='mx-48'>
         <div className='flex items-center justify-center m-auto w-4/6'>
@@ -28,6 +23,6 @@ export default function Home() {
         </div>
         <Carousel />
       </div> */}
-    </>
+    </Layout>
   )
 }

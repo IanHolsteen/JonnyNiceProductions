@@ -5,6 +5,7 @@ import Image from "next/image";
 import CartDetails from "../components/CartDetails"
 import CartContext from "../contexts/CartContext"
 import UserContext from "../contexts/UserContext"
+import Layout from '../components/Layout';
 
 export default function Cart() {
     const [cart, setCart] = useContext(CartContext)
@@ -56,12 +57,12 @@ export default function Cart() {
     );
 
     return (
-        <div>
+        <Layout>
         {purchaseSuccessful
             ? displayPurchaseSuccessfulMsg
             : cart?.length === 0
             ? displayEmptyCartMsg
             : <CartDetails user={user} setUser={setUser} handlePurchaseSuccessful={handlePurchaseSuccessful} />}
-        </div>
+        </Layout>
     );
 }
