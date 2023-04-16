@@ -4,12 +4,12 @@ import Layout from '../components/Layout';
 
 export default function Placements() {
     return (
-        <Layout>
-            <div className="flex flex-col items-center justify-center h-screen bg-fixed bg-center bg-cover bg-home">
-                <h2 className="text-white z-10 text-center text-6xl font-bold py-6 ">Credits</h2>
-                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2" />
-                        <div className="scroll-container z-[2] h-4/6 overflow-y-auto px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
-                            <div className="text-white z-2 text-center">
+        <Layout className="min-h-screen">
+        <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-home p-5 relative">
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
+                <h2 className="text-white z-[2] text-center text-6xl font-bold py-6 pt-40">Credits</h2>
+                    <div className="z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2" >
+                        <div className="text-white z-2 text-center">
                         <div className="justify-center grid grid-cols-3 gap-4 py-2">
                             <YoutubeEmbed embedId="J1HOjmor9M4" />
                             <YoutubeEmbed embedId="gAH2iLzQ3z4" />

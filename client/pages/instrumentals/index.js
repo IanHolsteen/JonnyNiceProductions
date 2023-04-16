@@ -44,12 +44,13 @@ export default function Instrumentals () {
         }
 
         return (
-            <div className="flex items-center justify-center h-screen bg-fixed bg-center bg-cover bg-home">
-                <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-[2]"/>
-                <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col"  style={{ height: "800px" }} >
-                    <h2 className="text-6xl font-bold pt-40">All Beats</h2>
-                    <p className="text-l">Select a title to see more options</p>
-                    <div className="scroll-container z-[2] flex-grow overflow-y-auto">
+            <Layout className="min-h-screen">
+                <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-beats p-5 relative">
+                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
+                        <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
+                            <h2 className="text-6xl font-bold pt-40">All Beats</h2>
+                        <p className="text-l">Select a title to see more options</p>
+                    <div className="flex flex-col z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
                     {instrumentals && instrumentals.map(instrumental => {
                         const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
                         return (
@@ -84,5 +85,6 @@ export default function Instrumentals () {
                     </div>
                 </div>
             </div>
+        </Layout>
     );
 }
