@@ -5,6 +5,7 @@ import CartContext from '../../contexts/CartContext';
 import UserContext from '../../contexts/UserContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Layout from '../components/Layout';
 
 export default function Instrumental () {
     const [instrumental, setInstrumental] = useState([]);
@@ -59,7 +60,7 @@ export default function Instrumental () {
     const { title } = instrumental
 
     return (
-        <>
+    <Layout>
         <div className="flex items-center justify-center h-screen bg-fixed bg-center bg-cover bg-beats">
             <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-[2]"/>
                 <div className="p-5 text-white z-[2] text-center w-[900px]">
@@ -105,6 +106,6 @@ export default function Instrumental () {
                     </div>
             </div>
         </div>
-        </>
+    </Layout>
     )
 }
