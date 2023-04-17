@@ -97,7 +97,7 @@ export default function Instrumental () {
                                     onClick={() => handleButtonClicked(audio_file.lease.id)}
                                     disabled={selectedLeaseId === audio_file.lease.id || addedToCartIds.includes(audio_file.lease.id)}
                                 >
-                                    {addedToCartIds.includes(audio_file.lease.id) ? `${audio_file.lease.contract_info} added to cart` : 'add to cart'}
+                                    {addedToCartIds.includes(audio_file.lease.id) ? 'added!' : 'add to cart'}
                                 </button>
                             </div>
                         </div>
