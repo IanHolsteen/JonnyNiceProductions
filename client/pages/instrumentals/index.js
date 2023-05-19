@@ -19,24 +19,20 @@ export default function Instrumentals () {
     const [isPlaying, setIsPlaying] = useState(false);
 
     const handlePlay = (index) => {
-        if (index === currentAudioIndex) {
-            const audio = playerRefs.current[index].audio.current;
-            if (audio.paused) {
-                setIsPlaying(true);
-            audio.play();
-            } else {
-                setIsPlaying(false);
-            audio.pause();
-            }
-        } else {
+        if (index !== currentAudioIndex) {
             if (currentAudioIndex !== null) {
                 playerRefs.current[currentAudioIndex].audio.current.pause();
             }
-            setIsPlaying(true);
-            playerRefs.current[index].audio.current.play();
             setCurrentAudioIndex(index);
-        }
-        };
+            } else {
+                const audio = playerRefs.current[index].audio.current;
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+            }
+    };
 
     const handlePause = () => {
         setIsPlaying(false);
