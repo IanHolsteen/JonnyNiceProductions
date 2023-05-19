@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import AudioPlayer from 'react-h5-audio-player';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import CartContext from '../../contexts/CartContext';
 import UserContext from '../../contexts/UserContext';
@@ -15,9 +15,18 @@ export default function Instrumentals () {
     const router = useRouter()
     const [selectedInstrumental, setSelectedInstrumental] = useState(null);
     const [currentAudioIndex, setCurrentAudioIndex] = useState(null);
+    const playerRefs = useRef([]);
+
 
     const handlePlay = (index) => {
-        setCurrentAudioIndex(index === currentAudioIndex ? null : index);
+        if (index === currentAudioIndex) {
+            playerRefs.current[index].audio.current.pause();
+            setCurrentAudioIndex(null);
+        } else {
+            playerRefs.current.forEach((playerRef) => playerRef.audio.current.pause());
+            playerRefs.current[index].audio.current.play();
+            setCurrentAudioIndex(index);
+        }
     };
 
 
@@ -94,15 +103,18 @@ export default function Instrumentals () {
                                 </div>
                                 <AudioPlayer
                                     src={audioUrl}
+                                    ref={(el) => (playerRefs.current[index] = el)}
+                                    customControlsSection={[]}
+                                    layout={RHAP_UI.STACKED}
                                     onPlay={() => handlePlay(index)}
-                                    onPause={() => handlePlay(index)}
+                                    onPause={() => handlePlay(null)}
                                     style={{
-                                    backgroundColor: 'rgba(30, 41, 59, 0.5)',
-                                    borderRadius: '10px',
-                                    padding: '10px',
-                                    textColor: 'white',
+                                        backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                                        borderRadius: '10px',
+                                        padding: '10px',
+                                        textColor: 'white',
                                     }}
-                                />
+                                    />
                                 </div>
                             </div>
                             )
