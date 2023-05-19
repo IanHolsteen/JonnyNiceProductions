@@ -93,7 +93,7 @@ export default function Instrumental () {
                             <div className="flex justify-between items-center pt-5" >
                                 <p>Price: $ {audio_file.lease.price}</p>
                                 <button
-                                className=" p-1 border rounded-md"
+                                    className=" p-1 border rounded-md"
                                     onClick={() => handleButtonClicked(audio_file.lease.id)}
                                     disabled={selectedLeaseId === audio_file.lease.id || addedToCartIds.includes(audio_file.lease.id)}
                                 >

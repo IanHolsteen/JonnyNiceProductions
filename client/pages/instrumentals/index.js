@@ -10,6 +10,7 @@ import Layout from '../../components/Layout';
 export default function Instrumentals () {
     const [instrumentals, setInstrumentals] = useState([]);
     const [cart, setCart] = useContext(CartContext);
+    const [searchValue, setSearchValue] = useState("");
     const [user, _setUser] = useContext(UserContext);
     const router = useRouter()
     const [selectedInstrumental, setSelectedInstrumental] = useState(null);
@@ -43,31 +44,47 @@ export default function Instrumentals () {
             })
         }
 
-        return (
-            <Layout className="min-h-screen">
-                <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-beats p-5 relative">
-                    <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
-                        <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
-                            <h2 className="text-6xl font-bold pt-40">All Beats</h2>
-                        <p className="text-l">Select a title to see more options</p>
-                    <div className="flex flex-col z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
-                    {instrumentals && instrumentals.map(instrumental => {
-                        const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
-                        return (
-                            <div key={instrumental.id} className="p-4">
-                                <div className="border-2 border-slate-800 rounded-lg p-2">
-                                    <Link href={`/instrumentals/${instrumental.id}`}>
-                                            <p className='underline font-bold text-xl pt-2'>{instrumental.title}</p>
-                                        </Link>
-                                    <div className="flex justify-between items-center">
-                                        <button
-                                            onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
-                                            className="border-2 rounded-md"
-                                        >
-                                            {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart` : "Add to Cart" }
-                                        </button>
-                                        <h3>Genre: {instrumental.genre.name}</h3>
-                                    </div>
+    const handleSearch = (event) => {
+        setSearchValue(event.target.value);
+    };
+
+    const filteredBeats = pokemons
+    .filter((instrumental) => instrumental.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+    return (
+        <Layout className="min-h-screen">
+            <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-beats p-5 relative">
+                <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
+                    <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
+                        <h2 className="text-6xl font-bold pt-40">All Beats</h2>
+                    <p className="text-l">Select a title to see more options</p>
+                    <form className="mb-6">
+                        <input
+                        type="text"
+                        placeholder="Search Beats..."
+                        value={searchValue}
+                        onChange={handleSearch}
+                        className="px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </form>
+                <div className="flex flex-col z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
+                {instrumentals && filteredBeats.map(instrumental => {
+                    const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
+                    return (
+                        <div key={instrumental.id} className="p-4">
+                            <div className="border-2 border-slate-800 rounded-lg p-2">
+                                <Link href={`/instrumentals/${instrumental.id}`}>
+                                        <p className='underline font-bold text-xl pt-2'>{instrumental.title}</p>
+                                    </Link>
+                                <div className="flex justify-between items-center">
+                                    <button
+                                        onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
+                                        className="border-2 rounded-md"
+                                    >
+                                        {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart` : "Add to Cart" }
+                                    </button>
+                                    <h3>Genre: {instrumental.genre.name}</h3>
+                                </div>
                                 <AudioPlayer
                                     src={audioUrl}
                                     onPlay={e => console.log("onPlay")}
