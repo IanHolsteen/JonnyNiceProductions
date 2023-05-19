@@ -48,8 +48,7 @@ export default function Instrumentals () {
         setSearchValue(event.target.value);
     };
 
-    const filteredBeats = pokemons
-    .filter((instrumental) => instrumental.title.toLowerCase().includes(searchValue.toLowerCase()));
+    const filteredBeats = instrumentals.filter((instrumental) => instrumental.title.toLowerCase().includes(searchValue.toLowerCase()));
 
     return (
         <Layout className="min-h-screen">
