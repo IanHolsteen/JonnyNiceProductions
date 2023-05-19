@@ -24,7 +24,13 @@ export default function Instrumentals () {
                 playerRefs.current[currentAudioIndex].audio.current.pause();
             }
             setCurrentAudioIndex(index);
-            playerRefs.current[index].audio.current.play();
+            }
+    };
+
+    const handlePause = () => {
+        if (currentAudioIndex !== null) {
+            playerRefs.current[currentAudioIndex].audio.current.pause();
+        setCurrentAudioIndex(null);
         }
     };
 
@@ -99,18 +105,18 @@ export default function Instrumentals () {
                                     </button>
                                     <h3>Genre: {instrumental.genre.name}</h3>
                                 </div>
-                                <AudioPlayer
-                                    src={audioUrl}
-                                    ref={(el) => (playerRefs.current[index] = el)}
-                                    layout={RHAP_UI.STACKED_REVERSE}
-                                    onPlay={() => handlePlay(index)}
-                                    onPause={() => handlePlay(null)}
-                                    style={{
-                                        backgroundColor: 'rgba(30, 41, 59, 0.5)',
-                                        borderRadius: '10px',
-                                        padding: '10px',
-                                        textColor: 'white',
-                                    }}
+                                    <AudioPlayer
+                                        src={audioUrl}
+                                        ref={(el) => (playerRefs.current[index] = el)}
+                                        layout={RHAP_UI.STACKED_REVERSE}
+                                        onPlay={() => handlePlay(index)}
+                                        onPause={handlePause}
+                                        style={{
+                                            backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                                            borderRadius: '10px',
+                                            padding: '10px',
+                                            textColor: 'white',
+                                        }}
                                     />
                                 </div>
                             </div>
