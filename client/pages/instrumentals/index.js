@@ -57,7 +57,7 @@ export default function Instrumentals () {
                     <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
                         <h2 className="text-6xl font-bold pt-40">All Beats</h2>
                     <div className="flex justify-between">
-                        <p className="text-l">Select a title to see more options</p>
+                        <p className="text-l p-1">Select a title to see lease options</p>
                         <form className="mb-6">
                             <input
                             type="text"
