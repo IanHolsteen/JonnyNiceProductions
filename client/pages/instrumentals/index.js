@@ -20,18 +20,20 @@ export default function Instrumentals () {
 
     const handlePlay = (index) => {
         if (index === currentAudioIndex) {
-            if (playerRefs.current[index].audio.current.paused) {
+            const audio = playerRefs.current[index].audio.current;
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+            } else {
+            if (currentAudioIndex !== null) {
+                playerRefs.current[currentAudioIndex].audio.current.pause();
+            }
                 playerRefs.current[index].audio.current.play();
-            } else {
-                playerRefs.current[index].audio.current.pause();
+                setCurrentAudioIndex(index);
             }
-            } else {
-            playerRefs.current[currentAudioIndex]?.audio.current.pause(); // Pause the currently playing audio
-            playerRefs.current[index].audio.current.play(); // Play the clicked audio
-            setCurrentAudioIndex(index);
-            }
-        };
-
+    };
 
     useEffect(() => {
         fetch(`/api/instrumentals`)
