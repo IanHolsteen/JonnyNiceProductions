@@ -23,8 +23,8 @@ export default function Instrumentals () {
             if (currentAudioIndex !== null) {
                 playerRefs.current[currentAudioIndex].audio.current.pause();
             }
-            playerRefs.current[index].audio.current.play();
             setCurrentAudioIndex(index);
+            playerRefs.current[index].audio.current.play();
         }
     };
 
