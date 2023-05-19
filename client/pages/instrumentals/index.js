@@ -104,8 +104,7 @@ export default function Instrumentals () {
                                 <AudioPlayer
                                     src={audioUrl}
                                     ref={(el) => (playerRefs.current[index] = el)}
-                                    customControlsSection={[]}
-                                    layout={RHAP_UI.STACKED}
+                                    layout={RHAP_UI.STACKED_REVERSE}
                                     onPlay={() => handlePlay(index)}
                                     onPause={() => handlePlay(null)}
                                     style={{
