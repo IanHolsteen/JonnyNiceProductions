@@ -14,6 +14,11 @@ export default function Instrumentals () {
     const [user, _setUser] = useContext(UserContext);
     const router = useRouter()
     const [selectedInstrumental, setSelectedInstrumental] = useState(null);
+    const [currentAudioIndex, setCurrentAudioIndex] = useState(null);
+
+    const handlePlay = (index) => {
+        setCurrentAudioIndex(index === currentAudioIndex ? null : index);
+    };
 
 
     useEffect(() => {
@@ -69,8 +74,9 @@ export default function Instrumentals () {
                         </form>
                     </div>
                 <div className="flex flex-col z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
-                {instrumentals && filteredBeats.map(instrumental => {
+                {instrumentals && filteredBeats.map((instrumental, index) => {
                     const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
+                    const isPlaying = currentAudioIndex === index;
                     return (
                         <div key={instrumental.id} className="p-4">
                             <div className="border-2 border-slate-800 rounded-lg p-2">
@@ -88,7 +94,8 @@ export default function Instrumentals () {
                                 </div>
                                 <AudioPlayer
                                     src={audioUrl}
-                                    onPlay={e => console.log("onPlay")}
+                                    onPlay={() => handlePlay(index)}
+                                    onPause={() => handlePlay(index)}
                                     style={{
                                     backgroundColor: 'rgba(30, 41, 59, 0.5)',
                                     borderRadius: '10px',
