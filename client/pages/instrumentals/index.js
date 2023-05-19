@@ -56,16 +56,18 @@ export default function Instrumentals () {
                 <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
                     <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
                         <h2 className="text-6xl font-bold pt-40">All Beats</h2>
-                    <p className="text-l">Select a title to see more options</p>
-                    <form className="mb-6">
-                        <input
-                        type="text"
-                        placeholder="Search Beats..."
-                        value={searchValue}
-                        onChange={handleSearch}
-                        className="px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                    </form>
+                    <div className="flex items-center">
+                        <p className="text-l">Select a title to see more options</p>
+                        <form className="mb-6">
+                            <input
+                            type="text"
+                            placeholder="Search by title..."
+                            value={searchValue}
+                            onChange={handleSearch}
+                            className="px-4 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
+                            />
+                        </form>
+                    </div>
                 <div className="flex flex-col z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
                 {instrumentals && filteredBeats.map(instrumental => {
                     const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
