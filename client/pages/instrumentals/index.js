@@ -64,7 +64,7 @@ export default function Instrumentals () {
                             placeholder="Search by title..."
                             value={searchValue}
                             onChange={handleSearch}
-                            className="border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
+                            className="border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent p-1"
                             />
                         </form>
                     </div>
