@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
+import React, { useState, useEffect, useContext } from 'react';
 import CartContext from '../../contexts/CartContext';
 import UserContext from '../../contexts/UserContext';
 import { useRouter } from 'next/router';
@@ -14,33 +12,25 @@ export default function Instrumentals () {
     const [user, _setUser] = useContext(UserContext);
     const router = useRouter()
     const [selectedInstrumental, setSelectedInstrumental] = useState(null);
-    const [currentAudioIndex, setCurrentAudioIndex] = useState(null);
-    const playerRefs = useRef([]);
+    const [currentAudioUrl, setCurrentAudioUrl] = useState('');
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const handlePlay = (index) => {
-        if (index !== currentAudioIndex) {
-            if (currentAudioIndex !== null) {
-                playerRefs.current[currentAudioIndex].audio.current.pause();
+    const handleAudioPlay = (audioUrl) => {
+        if (currentAudioUrl !== audioUrl) {
+            if (currentAudioUrl) {
+                const currentAudio = document.querySelector(`audio[src="${currentAudioUrl}"]`);
+                currentAudio.pause();
             }
-            setCurrentAudioIndex(index);
-            } else {
-                const audio = playerRefs.current[index].audio.current;
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-            }
-    };
-
-    const handlePause = () => {
-        setIsPlaying(false);
-        if (currentAudioIndex !== null) {
-            playerRefs.current[currentAudioIndex].audio.current.pause();
-            setCurrentAudioIndex(null);
+        setCurrentAudioUrl(audioUrl);
+        setIsPlaying(true);
         }
     };
+
+    const handleAudioPause = () => {
+        setCurrentAudioUrl('');
+        setIsPlaying(false);
+    };
+
 
     useEffect(() => {
         fetch(`/api/instrumentals`)
@@ -113,20 +103,12 @@ export default function Instrumentals () {
                                     </button>
                                     <h3>Genre: {instrumental.genre.name}</h3>
                                 </div>
-                                <AudioPlayer
-                                    src={audioUrl}
-                                    ref={(el) => (playerRefs.current[index] = el)}
-                                    layout={RHAP_UI.STACKED_REVERSE}
-                                    onPlay={() => handlePlay(index)}
-                                    onPause={handlePause}
-                                    playing={isPlaying}
-                                    style={{
-                                        backgroundColor: 'rgba(30, 41, 59, 0.5)',
-                                        borderRadius: '10px',
-                                        padding: '10px',
-                                        textColor: 'white',
-                                    }}
-                                />
+                                    <Audio
+                                        audioUrl={audioUrl}
+                                        onPlay={() => handleAudioPlay(audioUrl)}
+                                        onPause={handleAudioPause}
+                                        isPlaying={currentAudioUrl === audioUrl && isPlaying}
+                                    />
                                 </div>
                             </div>
                             )

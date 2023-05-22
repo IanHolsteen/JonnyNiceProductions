@@ -15,6 +15,15 @@ export default function Instrumental () {
     const id = router.query.id
     const [selectedLeaseId, setSelectedLeaseId] = useState(null);
     const [addedToCartIds, setAddedToCartIds] = useState([]);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const handleAudioPlay = () => {
+        setIsPlaying(true);
+    };
+
+    const handleAudioPause = () => {
+        setIsPlaying(false);
+    };
 
     useEffect(() => {
         fetch(`/api/instrumentals/${id}`)
@@ -73,17 +82,13 @@ export default function Instrumental () {
                 <p className="py-5 text-xl"></p>
                 <h3>Genre: {instrumental.genre?.name}</h3>
                     <div key={instrumental.id}>
-                        <AudioPlayer
-                            src={audioUrl}
-                            onPlay={e => console.log("onPlay")}
-                            style={{
-                                backgroundColor: 'rgba(30, 41, 59, 0.5)',
-                                borderRadius: '10px',
-                                padding: '10px',
-                                textColor: 'white',
-                            }}
+                        <Audio
+                            audioUrl={audioUrl}
+                            onPlay={() => handleAudioPlay(audioUrl)}
+                            onPause={handleAudioPause}
+                            isPlaying={isPlaying}
                         />
-                </div>
+                    </div>
                 <h2 className="text-xl p-5">Lease Options</h2>
                 <div className="flex flex-wrap justify-center gap-4 border-t-2 py-6">
                     {instrumental?.audio_files?.map((audio_file, j) => (
@@ -103,7 +108,7 @@ export default function Instrumental () {
                         </div>
                         )
                     ))}
-                    </div>
+                </div>
             </div>
         </div>
     </Layout>
