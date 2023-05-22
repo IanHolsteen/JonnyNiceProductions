@@ -6,6 +6,7 @@ import UserContext from '../../contexts/UserContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
+import Audio from '../../components/Audio';
 
 export default function Instrumental () {
     const [instrumental, setInstrumental] = useState([]);
