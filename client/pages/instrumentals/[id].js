@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
 import CartContext from '../../contexts/CartContext';
 import UserContext from '../../contexts/UserContext';
 import { useRouter } from 'next/router';
