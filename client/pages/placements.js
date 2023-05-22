@@ -38,7 +38,7 @@ export default function Placements() {
                             <Spotify wide link="https://open.spotify.com/track/1ftBP8EtlxbYcuw9Z4mn0b" id="Brodcast" />
                             <Spotify wide link="https://open.spotify.com/track/3Lhx7PjyIEkeHroFtRC3SS" id="Brodcast" />
                             <Spotify wide link="https://open.spotify.com/track/4giYdUE0MtZ3uIAhBVtUf8" id="Brodcast" />
-                            <Spotify wide link="https://open.spotify.com/track/7vv2JhGR7BZsJxKAE9sk7C" id="Brodcast" />
+                            {/* <Spotify wide link="https://open.spotify.com/track/7vv2JhGR7BZsJxKAE9sk7C" id="Brodcast" /> */}
                             <Spotify wide link="https://open.spotify.com/track/568vSjf5gygGRjGvHHtFlw" id="Brodcast" />
                             <Spotify wide link="https://open.spotify.com/track/1XJaB7sPCBLuv6NBpYIuqu" id="Brodcast" />
                         <div className="grid grid-cols-3 gap-4 place-content-center">
