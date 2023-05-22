@@ -114,8 +114,8 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
     const dis = "Thanks for signing up. Here's a discount."
 
     return (
-        <div className="grid grid-cols-2 mt-20 ml-32 pt-20 mb-12">
-            <div>
+        <div className="grid grid-cols-2 mt-20 ml-32 pt-12 pb-12 relative">
+            <div className="pl-40">
                 <h1 className="font-bold text-4xl mt-14">Shopping Cart</h1>
                 <Link href="/instrumentals" className='flex items-center mt-5 -ml-4 cursor-pointer '>
                     <Image src={ArrowLeft} alt="Arrow Left" width="48" height="48"/>
@@ -125,7 +125,7 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                     {createCartItems}
                 </div>
             </div>
-            <div className="bg-stone-100 h-span">
+            <div className="bg-stone-100 absolute inset-0 left-auto right- w-1/2">
                 <div className="grid grid-row-1 divide-y ml-20 mr-20 max-w-[600px]">
                     <h1 className="font-bold text-4xl mb-10 mt-14">Order Summary</h1>
                     <div className=''>
@@ -141,7 +141,8 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                                 <td className='pt-5 font-medium text-right'>
                                 <div>
                                     <span>Total: ${total.toFixed(2)}</span>
-                                    {user?.email == "Guest" ? null : (<div><p>{dis}</p>
+                                    {user?.email == "Guest" ? null : (<div>
+                                        <p>{dis}</p>
                                         <span>
                                             Discounted total: ${discountedTotal.toFixed(2)}
                                         </span>
@@ -162,11 +163,6 @@ export default function CartDetails ({ setUser, user, handlePurchaseSuccessful }
                         </tbody>
                     </table>
                     <div className='items-center text-center mt-2'>
-                        {/* <button onClick={handlePurchase}
-                            className='bg-black text-white rounded-full text-sm m-2 py-3 px-64 mb-12 mt-4'
-                        >
-                            Success Test
-                        </button> */}
                         <div className="mb-8 p-4">
                         <StripeCheckout
                             token={onToken}

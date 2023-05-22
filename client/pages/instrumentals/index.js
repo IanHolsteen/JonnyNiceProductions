@@ -97,7 +97,6 @@ export default function Instrumentals () {
                                 <div className="flex justify-between items-center">
                                     <button
                                         onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
-                                        className="border-2 rounded-md"
                                     >
                                         {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart` : "Add to Cart" }
                                     </button>
