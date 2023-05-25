@@ -154,6 +154,17 @@ instrumentals_data = [
       { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/crazy.mp3' },
       { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/crazy.mp3' }
     ]
+  },
+  {
+    title: "Angels",
+    picture: "",
+    info: "about this track",
+    genre: Genre.first,
+    leases: [
+      { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Angels.mp3' },
+      { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Angels.mp3' },
+      { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Angels.mp3' }
+    ]
   }
 ]
 
