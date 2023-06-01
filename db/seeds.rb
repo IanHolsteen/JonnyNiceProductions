@@ -13,14 +13,25 @@ g2 = Genre.create(name: "Trap")
 
 instrumentals_data = [
   {
-    title: "Vile",
+    title: "Doctor",
     picture: "",
     info: "about this track",
     genre: Genre.first,
     leases: [
-      { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Vile x train x flemps.mp3' },
-      { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Vile x train x flemps.mp3' },
-      { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Vile x train x flemps.mp3' }
+      { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Doctor.mp3' },
+      { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Doctor.mp3' },
+      { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Doctor.mp3' }
+    ]
+  },
+  {
+    title: "Spin",
+    picture: "",
+    info: "about this track",
+    genre: Genre.first,
+    leases: [
+      { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Spin.mp3' },
+      { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Spin.mp3' },
+      { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Spin.mp3' }
     ]
   },
   {
@@ -68,17 +79,6 @@ instrumentals_data = [
     ]
   },
   {
-    title: "Spin",
-    picture: "",
-    info: "about this track",
-    genre: Genre.first,
-    leases: [
-      { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Spin.mp3' },
-      { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Spin.mp3' },
-      { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Spin.mp3' }
-    ]
-  },
-  {
     title: "Dive",
     picture: "",
     info: "about this track",
@@ -87,6 +87,17 @@ instrumentals_data = [
       { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Dive.mp3' },
       { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Dive.mp3' },
       { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Dive.mp3' }
+    ]
+  },
+  {
+    title: "Vile",
+    picture: "",
+    info: "about this track",
+    genre: Genre.first,
+    leases: [
+      { contract_info: 'mp3 lease, unlimited use', price: 40, contract_file_path: './public/contracts/*mp3 license.pdf', audio_file_path: './public/audio/Vile x train x flemps.mp3' },
+      { contract_info: 'wav lease, unlimited use', price: 80, contract_file_path: './public/contracts/*Unlimited License Agreement.pdf', audio_file_path: './public/audio/Vile x train x flemps.mp3' },
+      { contract_info: 'exclusive lease, unlimited use', price: 500, contract_file_path: './public/contracts/*Exclusive License Agreement.pdf', audio_file_path: './public/audio/Vile x train x flemps.mp3' }
     ]
   },
   {
