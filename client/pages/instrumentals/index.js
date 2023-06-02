@@ -69,6 +69,10 @@ export default function Instrumentals () {
 
     const filteredBeats = instrumentals.filter((instrumental) => instrumental.title.toLowerCase().includes(searchValue.toLowerCase()));
 
+    useEffect(() => {
+        setSortedBeats(instrumentals);
+    }, [instrumentals]);
+
     const handleSortByGenre = () => {
         if (selectedGenre === '') {
             setSortedBeats(filteredBeats);
