@@ -15,6 +15,8 @@ export default function Instrumentals () {
     const [selectedInstrumental, setSelectedInstrumental] = useState(null);
     const [currentAudioUrl, setCurrentAudioUrl] = useState('');
     const [isPlaying, setIsPlaying] = useState(false);
+    const [selectedGenre, setSelectedGenre] = useState('');
+    const [sortedBeats, setSortedBeats] = useState([]);
 
     const handleAudioPlay = (audioUrl) => {
         if (currentAudioUrl !== audioUrl) {
@@ -67,12 +69,43 @@ export default function Instrumentals () {
 
     const filteredBeats = instrumentals.filter((instrumental) => instrumental.title.toLowerCase().includes(searchValue.toLowerCase()));
 
+    const handleSortByGenre = () => {
+        if (selectedGenre === '') {
+            setSortedBeats(filteredBeats);
+        } else {
+                const sortedInstrumentals = instrumentals.filter(
+                (instrumental) => instrumental.genre.name.toLowerCase() === selectedGenre.toLowerCase()
+            );
+        setSortedBeats(sortedInstrumentals);
+        }
+    };
+
+    useEffect(() => {
+        handleSortByGenre();
+    }, [selectedGenre]);
+
+    if (!instrumentals) {
+        return <div>Loading...</div>; // or any other loading indicator or message
+    }
+
+
     return (
         <Layout className="min-h-screen">
             <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-beats p-5 relative">
                 <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
                     <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
-                        <h2 className="text-6xl font-bold pt-40">All Beats</h2>
+                        <div className="font-bold pt-40">
+                            <select
+                                className="text-4xl text-center font-bold bg-transparent outline-none"
+                                value={selectedGenre}
+                                onChange={(e) => setSelectedGenre(e.target.value)}
+                            >
+                                <option value="">All Genres</option>
+                                <option value="Drill">Drill</option>
+                                <option value="Trap">Trap</option>
+                                {/* Add more options for other genres */}
+                            </select>
+                        </div>
                     <div className="flex justify-between">
                         <p className="text-l p-1">Select a title to see lease options</p>
                         <form className="mb-6">
@@ -86,7 +119,7 @@ export default function Instrumentals () {
                         </form>
                     </div>
                 <div className="flex flex-col z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2">
-                {instrumentals && filteredBeats.map((instrumental, index) => {
+                {instrumentals && sortedBeats.map((instrumental, index) => {
                     const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
                     return (
                         <div key={instrumental.id} className="p-4">
