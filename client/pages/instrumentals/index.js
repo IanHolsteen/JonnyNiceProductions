@@ -17,6 +17,22 @@ export default function Instrumentals () {
     const [isPlaying, setIsPlaying] = useState(false);
     const [selectedGenre, setSelectedGenre] = useState('');
     const [sortedBeats, setSortedBeats] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
 
     const handleAudioPlay = (audioUrl) => {
         if (currentAudioUrl !== audioUrl) {
@@ -97,7 +113,7 @@ export default function Instrumentals () {
         <Layout className="min-h-screen">
             <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-beats p-5 relative">
                 <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-2 w-full h-full fixed"></div>
-                    <div className="p-5 text-white z-[2] text-center w-[900px] flex flex-col" >
+                    <div className={`p-5 text-white z-[2] text-center ${ isMobile ? "" : "w-[900px]"} flex flex-col `}>
                         <div className="font-bold pt-40">
                             <select
                                 className="text-4xl text-center font-bold bg-transparent outline-none"
@@ -111,7 +127,7 @@ export default function Instrumentals () {
                             </select>
                         </div>
                     <div className="flex justify-between">
-                        <p className="text-l p-1">Select a title to see lease options</p>
+                        <p className={`${isMobile ? "text-sm" : "text-l"} p-1`}>Select a title to see lease options</p>
                         <form className="mb-6">
                             <input
                             type="text"
@@ -127,18 +143,22 @@ export default function Instrumentals () {
                     const audioUrl = `https://jonnynice.onrender.com${instrumental.audio_files[0].file}`;
                     return (
                         <div key={instrumental.id} className="p-4">
-                            <div className="border-2 border-slate-800 rounded-lg p-2">
-                                <Link href={`/instrumentals/${instrumental.id}`}>
-                                        <p className='underline font-bold text-xl pt-2'>{instrumental.title}</p>
-                                    </Link>
-                                <div className="flex justify-between items-center">
-                                    <button
-                                        onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
-                                    >
-                                        {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart` : "Add to Cart" }
-                                    </button>
-                                    <h3>Genre: {instrumental.genre.name}</h3>
-                                </div>
+                            <div className={`border-2 border-slate-800 rounded-lg p-2 relative ${isMobile ? "pt-8" : ""}`}>
+                            <div className="flex justify-between items-center">
+                                        <div className="relative z-10 ">
+                                        <button
+                                            onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
+                                        >
+                                            {selectedInstrumental === instrumental.audio_files[0].lease?.id ? `${instrumental.title}\u00A0added to cart!` : "Add to Cart" }
+                                        </button>
+                                        </div>
+                                            <div className={`absolute inset-x-0 flex items-center justify-center pointer-events-none ${isMobile ? "pb-10" : "pb-1"}`}>
+                                                <Link href={`/instrumentals/${instrumental.id}`} >
+                                                    <p className='underline font-bold text-xl pointer-events-auto'>{instrumental.title}</p>
+                                                </Link>
+                                            </div>
+                                        <h3>Genre: {instrumental.genre.name}</h3>
+                                    </div>
                                     <Audio
                                         audioUrl={audioUrl}
                                         onPlay={() => handleAudioPlay(audioUrl)}
