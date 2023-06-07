@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 
 export default function Contact() {
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkIsMobile = () => {
         const userAgent = window.navigator.userAgent;

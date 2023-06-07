@@ -1,8 +1,26 @@
 import { Spotify } from "../components/Spotify";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import Layout from '../components/Layout';
+import React, { useEffect, useState } from "react";
 
 export default function Placements() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
+
     return (
         <Layout className="min-h-screen">
         <div className="flex flex-col items-center justify-center bg-fixed bg-center bg-cover bg-home p-5 relative">
@@ -10,7 +28,7 @@ export default function Placements() {
                 <h2 className="text-white z-[2] text-center text-6xl font-bold py-6 pt-40">Credits</h2>
                     <div className="z-[2] h-4/6 px-5 py-3 border-solid border-2 border-zinc-800 rounded-md p-2" >
                         <div className="text-white z-2 text-center">
-                        <div className="justify-center grid grid-cols-3 gap-4 py-2">
+                        <div className={`justify-center grid ${ isMobile ? "" : "grid-cols-3"} gap-4 py-2`}>
                             <YoutubeEmbed embedId="J1HOjmor9M4" />
                             <YoutubeEmbed embedId="gAH2iLzQ3z4" />
                             <YoutubeEmbed embedId="Vgoar37uF-k" />
@@ -41,7 +59,7 @@ export default function Placements() {
                             {/* <Spotify wide link="https://open.spotify.com/track/7vv2JhGR7BZsJxKAE9sk7C" id="Brodcast" /> */}
                             <Spotify wide link="https://open.spotify.com/track/568vSjf5gygGRjGvHHtFlw" id="Brodcast" />
                             <Spotify wide link="https://open.spotify.com/track/1XJaB7sPCBLuv6NBpYIuqu" id="Brodcast" />
-                        <div className="grid grid-cols-3 gap-4 place-content-center">
+                        <div className={`grid  ${ isMobile ? "" : "grid-cols-3"} gap-4 place-content-center`}>
                             <Spotify link="https://open.spotify.com/album/49MCny8XcNaNsmrbXJJrOK" className="mx-auto" id="brodcast" />
                             <Spotify link="https://open.spotify.com/album/2514mjq37KdZHDcWRyryKt" className="mx-auto" id="brodcast" />
                             <Spotify link="https://open.spotify.com/album/24KtZOCzpcUCsZd7TVDg2r" className="mx-auto" id="brodcast" />
