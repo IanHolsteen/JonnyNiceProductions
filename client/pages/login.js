@@ -15,6 +15,22 @@ export default function Login() {
         email: '',
         password: ''
         })
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
 
     useEffect(() => {
         fetch("/api/me").then((r) => {
@@ -29,11 +45,11 @@ export default function Login() {
 
     return (
         <Layout>
-            <div className="grid grid-cols-3 mt-32">
+            <div className={`grid ${ isMobile ? "" : "grid-cols-3"} mt-32`}>
                 <div className="col-span-2 bg-cover bg-auth w-full">
                     </div>
                 <div className="bg-stone-100 h-full">
-                    <div className="ml-20">
+                    <div className={`${ isMobile ? "" : "ml-20"}`}>
                     {click == null ?
                         <div>
                         {user && user.purchases && user.purchases.length > 0 && (<div className="absolute top-0 left-0" style={{top: "50%", left: "33.33%", transform: "translate(-50%, -50%)", width: "50%", height: "50%"}}>
