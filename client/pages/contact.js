@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import emailjs from '@emailjs/browser';
-import HomeLayout from '../components/HomeLayout';
+import Layout from '../components/Layout';
 
 export default function Contact() {
   const [isMobile, setIsMobile] = useState(false);
