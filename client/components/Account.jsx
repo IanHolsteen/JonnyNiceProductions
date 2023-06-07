@@ -1,6 +1,22 @@
-import React from "react"
+import React, { useState, useEffect } from 'react';
 
 export default function account({user, handleChange, setClick, form}) {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -13,15 +29,15 @@ export default function account({user, handleChange, setClick, form}) {
         return (
             <>
             {user?.email === "Guest" || user == null ?
-            <div className="h-screen">
+            <div className={`${ isMobile ? "" : "h-screen"}`}>
                 <h1 className="grid grid-cols-2 font-bold text-4xl pb-2 pt-40">
                     Account
                 </h1>
-                <div className="py-5 mr-10">
+                <div className={`py-5 ${isMobile ? "" : "mr-10"}`}>
                     <form onSubmit={handleSubmit} className="w-96 justify-center">
-                        <input onChange={handleChange} className="inline-flex w-[500px] h-14 bg-white px-4 py-2 text-base items-center text-left font-normal shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100" id="username" type="text" placeholder="Email Address" name="email" value={form.email}/>
+                        <input onChange={handleChange} className="inline-flex w-[380px] h-14 bg-white px-4 py-2 text-base items-center text-left font-normal shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100" id="username" type="text" placeholder="Email Address" name="email" value={form.email}/>
                         <div className='items-center text-center mt-2'>
-                            <button className='w-[500px] bg-black rounded-full text-white text-base font-medium m-2 py-3 px-10 mb-5 mt-5'>Next</button>
+                            <button className='w-[300px] bg-black rounded-full text-white text-base font-medium m-2 py-3 px-10 mb-5 mt-5'>Next</button>
                         </div>
                     </form>
                     <div className='mt-16'>

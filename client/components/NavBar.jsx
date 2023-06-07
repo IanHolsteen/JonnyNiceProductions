@@ -16,7 +16,22 @@ export default function Navbar() {
     const [user, setUser] = useContext(UserContext);
     const [isScrolled, setIsScrolled] = useState(false);
     const router = useRouter()
-    console.log(user)
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
 
     let quantity = 0;
 
@@ -115,10 +130,175 @@ export default function Navbar() {
     }, [isScrolled, router.pathname])
 
     return (
+        <div>
+        { isMobile ?
+        <div className='fixed top-8 w-full z-10 flex justify-center h-40'>
+            <div
+                className='fixed top-8 w-full z-10 flex items-center pl-2 h-20'>
+                    <div className=''>
+                    <div className="relative w-20 h-20">
+                        {/* <div style= {{ backgroundColor: `${color}` }} className="absolute top-0 left-0 w-20 h-20 transform rotate-45"></div> */}
+                        <Link href="/" className="z-30 relative absolute inset-x-0">
+                            {color == 'transparent' ? <Image src={Logo} alt="Jonny Logo" width={115} height={16} /> : <Image src={LogoDark} alt="Jonny Logo" width={115} height={16} />}
+                        </Link>
+                    </div>
+                </div>
+                <ul style={{ color: `${textColor}` }} className='flex text-white'>
+                    <li className='px-1'><Link href="/placements">Credits</Link></li>
+                    <li className='px-1'><Link href="/about">About</Link></li>
+                    <li className='px-1'><Link href="/contact">Contact</Link></li>
+                </ul>
+            {user?.email == "Guest" || user == null ?
+                    <ul style={{ color: `${textColor}` }} className='flex text-white'>
+                        <li className='px-1'><Link href="/instrumentals">Beats</Link></li>
+                        <div className=''>
+                            <li style={{ color: `${textColor}` }} className='px-1'><Link href="/cart">Cart</Link></li>
+                        {quantity > 0 ?
+                            <>
+                                <li className="px-1 text-white items-center bg-black rounded-full">
+                                    <Link href="/cart">{quantity}</Link>
+                                </li>
+                            </>
+                        : <li className='px-1'></li>}
+                        </div>
+                    </ul>
+                    :
+                        <>
+                            <ul style={{ color: `${textColor}` }} className='flex'>
+                                <li className='px-1'><Link href="/instrumentals">Beats</Link></li>
+                                    <div className='flex'>
+                                    <li style={{ color: `${textColor}` }} className='px-1'><Link href="/cart">Cart</Link></li>
+                                {quantity > 0 ?
+                                <>
+                                    <li className="px-1 text-white items-center bg-black rounded-full">
+                                        <Link href="/cart">{quantity}</Link>
+                                    </li>
+                                </>
+                            : <li className="px-1"></li>}
+                            </div>
+                        </ul>
+                    </>
+                    }
+                    <div>
+                        <Link href="/login" className=''>
+                            {color == 'transparent' ? <Image src={User} alt="User Icon" width="auto" height={20} /> : <Image src={isScrolled ? User : UserDark} alt="User Icon" width="auto" height={20} />}
+                        </Link>
+                    </div>
+                </div>
+                    {user?.email == "Guest" || user == null ? null : <div>
+                        {color == 'transparent' ?
+                        <ul className='z-20 pt-40'>
+                            <Link href="/" onClick={handleLogOut} className='text-white z-20'>
+                                Logout
+                            </Link>
+                            </ul>
+                            :
+                            <ul className=''>
+                                <Link href="/" onClick={handleLogOut} className='px-1 z-20'>
+                                    Logout
+                                </Link>
+                            </ul>
+                        }
+                    </div>}
+            </div>
+        :
         <div style={navbarStyle}
             className={`transition-all duration-600 ${isScrolled
                 ? 'fixed z-10 h-20'
-                : 'fixed top-8 w-full z-10 flex items-center justify-center h-20'}`}>
+                : `${isMobile ? 'fixed top-8 z-10 justify-center items-center' : 'fixed top-8 w-full z-10 flex items-center justify-center h-20'}`}`}>
+            <ul style={{ color: `${textColor}` }} className={`transition-all duration-600 ${isScrolled ?
+                'pt-[220px] pl-24' : 'flex px-5 text-white'}`}>
+                <li className={`transition-all duration-600 ${isScrolled ?
+                '' : `${isMobile ? "px-1" : "px-5"}`}`}><Link href="/placements">Credits</Link></li>
+                <li className={`transition-all duration-600 ${isScrolled ?
+                'pt-4' : `${isMobile ? "px-1" : "px-5"}`}`}><Link href="/about">About</Link></li>
+                <li className={`transition-all duration-600 ${isScrolled ?
+                'pt-4' : `${isMobile ? "px-1" : "px-5"}`}`}><Link href="/contact">Contact</Link></li>
+            </ul>
+            <div className={`transition-all duration-600 ${isScrolled ?
+                'absolute top-20 left-20' : `${isMobile ? "" : "px-[250px]"}`}`}>
+                <div className="relative w-20 h-20">
+                    <div style= {{ backgroundColor: `${color}` }} className="absolute top-0 left-0 w-20 h-20 transform rotate-45"></div>
+                    <Link href="/" className="z-30 relative absolute inset-x-0">
+                        {color == 'transparent' ? <Image src={Logo} alt="Jonny Logo" width={115} height={16} /> : <Image src={LogoDark} alt="Jonny Logo" width={115} height={16} />}
+                    </Link>
+                </div>
+            </div>
+        {user?.email == "Guest" || user == null ?
+                <ul style={{ color: `${textColor}` }} className={`transition-all duration-600 ${isScrolled ?
+                    'pl-24' : `${isMobile ? "flex px-3 text-white" : "flex px-14 text-white"}`}`}>
+                    <li className={`transition-all duration-600 ${isScrolled ?
+                'pt-4' : `${isMobile ? "px-1" : "px-4"}`}`}><Link href="/instrumentals">Beats</Link></li>
+                    <div className={`transition-all duration-600 ${isScrolled ?
+                'flex pt-4' : 'flex text-white'}`}>
+                        <li style={{ color: `${textColor}` }} className={`transition-all duration-600 ${isScrolled ?
+                '' : 'px-4 -mr-3'}`}><Link href="/cart">Cart</Link></li>
+                    {quantity > 0 ?
+                        <>
+                            <li className="px-2 text-white items-center bg-black rounded-full">
+                                <Link href="/cart">{quantity}</Link>
+                            </li>
+                        </>
+                    : <li className={`${isMobile ? "px-1" : "px-3"}`}></li>}
+                    </div>
+                </ul>
+                :
+                    <>
+                        <ul style={{ color: `${textColor}` }} className={`transition-all duration-600 ${isScrolled ?
+                            'pl-24' : 'flex px-4 text-white'}`}>
+                            <li className={`transition-all duration-600 ${isScrolled ?
+                            'pt-4' : 'px-4'}`}><Link href="/instrumentals">Beats</Link></li>
+                                <div className={`transition-all duration-600 ${isScrolled ?
+                                    'flex pt-4' : 'flex text-white'}`}>
+                                <li style={{ color: `${textColor}` }} className={`transition-all duration-600 ${isScrolled ?
+                                    '' : 'px-4 -mr-3'}`}><Link href="/cart">Cart</Link></li>
+                            {quantity > 0 ?
+                            <>
+                                <li className="px-2 text-white items-center bg-black rounded-full">
+                                    <Link href="/cart">{quantity}</Link>
+                                </li>
+                            </>
+                        : <li className="px-3"></li>}
+                        </div>
+                    </ul>
+                </>
+                }
+                <div>
+                    <Link href="/login" className={`transition-all duration-600 ${isScrolled ?
+                'custom-right-10' : 'px-12 hover'}`}>
+                        {color == 'transparent' ? <Image src={User} alt="User Icon" width="auto" height={20} /> : <Image src={isScrolled ? User : UserDark} alt="User Icon" width="auto" height={20} />}
+                    </Link>
+                </div>
+                {user?.email == "Guest" || user == null ? null : <div>
+                    {color == 'transparent' ?
+                    <ul className={`transition-all duration-600 ${isScrolled ?
+                        'pl-[95px] pt-[44px]' : 'px-3'}`}>
+                        <Link href="/" onClick={handleLogOut} className={`transition-all duration-600 ${isScrolled ?
+                            'text-white' : 'text-white'}`}>
+                            Logout
+                        </Link>
+                        </ul>
+                        :
+                        <ul className={`transition-all duration-600 ${isScrolled ?
+                            'pl-[95px] pt-[44px]' : 'px-3'}`}>
+                            <Link href="/" onClick={handleLogOut} className={`transition-all duration-600 ${isScrolled ?
+                            'text-white' : 'text-black'}`}>
+                                Logout
+                            </Link>
+                        </ul>
+                    }
+                </div>}
+        </div>}
+        </div>
+    );
+}
+
+
+
+{/* <div style={navbarStyle}
+            className={`transition-all duration-600 ${isScrolled
+                ? 'fixed z-10 h-20'
+                : 'fixed top-8 w-full z-10 flex items-center justify-center h-20'} ${isMobile ? "mobile-navbar" : ""}`}>
             <ul style={{ color: `${textColor}` }} className={`transition-all duration-600 ${isScrolled ?
                 'pt-[220px] pl-24' : 'flex px-5 text-white'}`}>
                 <li className={`transition-all duration-600 ${isScrolled ?
@@ -201,6 +381,4 @@ export default function Navbar() {
                         </ul>
                     }
                 </div>}
-        </div>
-    );
-}
+        </div> */}

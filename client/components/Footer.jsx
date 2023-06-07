@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import insta from "../public/logos/instagram.svg"
 import youtube from "../public/logos/youtube.svg"
 import Link from "next/link";
 
 export default function Footer() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
+
     return (
-        <footer className="bg-zinc-900">
+        <footer className="bg-zinc-900 footer">
             <div className="text-white justify-center p-8">
-                <div className="flex">
-                    <div className="w-96 mr-80">
-                <p className="font-light text-sm mb-5">Sign up to receive exclusive news and discounts on leases.</p>
+                <div className={`${isMobile ? "" : "flex"}`}>
+                    <div className={`${isMobile ? "" : "w-96 mr-80"}`}>
+                <p className={`${isMobile ? "" : "font-light text-sm mb-5"}`}>Sign up to receive exclusive news and discounts on leases.</p>
                     <Link href="/login"><button className="bg-neutral-600 rounded-full text-sm py-3 px-10">Register</button></Link>
                 </div>
                     <div className="w-32"></div>
