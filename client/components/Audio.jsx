@@ -8,6 +8,22 @@ export default function Audio({ audioUrl, onPlay, onPause, isPlaying }) {
     const [volume, setVolume] = useState(1);
     const [isLooping, setIsLooping] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const userAgent = window.navigator.userAgent;
+            setIsMobile(/iPhone|iPad|iPod|Android/i.test(userAgent));
+        };
+
+        checkIsMobile();
+
+        window.addEventListener("resize", checkIsMobile);
+
+        return () => {
+            window.removeEventListener("resize", checkIsMobile);
+        };
+    }, []);
 
     useEffect(() => {
         const audio = audioRef.current;
@@ -101,7 +117,7 @@ export default function Audio({ audioUrl, onPlay, onPause, isPlaying }) {
                         </div>
                     <div>{formatTime(duration)}</div>
                 </div>
-                    <div className="controls flex justify-between items-center px-1 pt-2 pb-1">
+                    <div className={`controls flex justify-between items-center px-1 ${ isMobile ? "" : "pt-2"} pb-1`}>
 
                         <div>
                             <button onClick={handleLoopToggle} className="relative z-10">
@@ -117,7 +133,7 @@ export default function Audio({ audioUrl, onPlay, onPause, isPlaying }) {
                             <button onClick={() => handleFastForward(5)}><FaForward size= {20} color="#d1d5db" /></button>
                         </div>
 
-                    <div className="title flex items-center justify-between" >
+                    <div className={`flex items-center ${isMobile ? "pt-10" : ""} justify-between`} >
                         <button onClick={mute} className="pr-2 relative z-10" style={{ paddingTop: '.4rem' }}>{ volume === 0 ? <FaVolumeOff color="#d1d5db" /> : <FaVolumeUp color="#d1d5db" /> }</button>
                     <div className="volume max-w-100px">
                         <input

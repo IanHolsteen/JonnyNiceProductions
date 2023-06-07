@@ -105,7 +105,7 @@ export default function Instrumentals () {
     }, [selectedGenre]);
 
     if (!instrumentals) {
-        return <div>Loading...</div>; // or any other loading indicator or message
+        return <div>Loading...</div>;
     }
 
 
@@ -144,7 +144,7 @@ export default function Instrumentals () {
                     return (
                         <div key={instrumental.id} className="p-4">
                             <div className={`border-2 border-slate-800 rounded-lg p-2 relative ${isMobile ? "pt-8" : ""}`}>
-                            <div className="flex justify-between items-center">
+                                <div className="flex justify-between items-center">
                                         <div className="relative z-10 ">
                                         <button
                                             onClick={() => {handleClick(instrumental.audio_files[0].lease?.id)}}
