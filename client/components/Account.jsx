@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function account({user, handleChange, setClick, form}) {
+export default function Account({user, handleChange, setClick, form}) {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
