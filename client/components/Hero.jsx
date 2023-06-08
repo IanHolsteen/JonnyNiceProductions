@@ -27,7 +27,7 @@ export default function Hero({ heading, message }) {
                 <p className={`py-5 text-xl ${isMobile ? 'mobile-message' : ''}`}>{message}</p>
                 <div className={`pt-40 flex justify-center ${isMobile ? 'gap-20' : 'gap-40'}`}>
                     <Link className={`bg-black text-white rounded-full py-3 text-center justify-center ${isMobile ? 'px-1' : 'px-6'}`} href="/instrumentals">Browse Beats</Link>
-                    <Link className={`bg-black text-white rounded-full py-3 text-center justify-center ${isMobile ? 'px-1' : 'px-6'}`} href="https://youtube.com/c/jonnynice">Youtube</Link>
+                    <Link className={`bg-black text-white rounded-full py-3 text-center justify-center ${isMobile ? 'px-1 pt-6 ' : 'px-6'}`} href="https://youtube.com/c/jonnynice">Youtube</Link>
                     <Link className={`bg-black text-white rounded-full py-3 text-center justify-center ${isMobile ? 'px-1' : 'px-6'}`} href="/contact">Contact Me</Link>
                 </div>
             </div>
