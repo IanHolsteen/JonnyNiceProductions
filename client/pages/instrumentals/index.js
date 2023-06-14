@@ -123,6 +123,7 @@ export default function Instrumentals () {
                                 <option value="">All Genres</option>
                                 <option value="Drill">Drill</option>
                                 <option value="Trap">Trap</option>
+                                <option value="Hip-Hop">Hip-Hop</option>
                                 {/* Add more options for other genres */}
                             </select>
                         </div>
